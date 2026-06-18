@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom"
 import {type IThumbnail, type AspectRatio, colorSchemes, type ThumbnailStyle} from  "../assets/assets"
 import SoftBackdrop from "../components/SoftBackdrop"
 import AspectRatioSelector from "../components/AspectRatioSelector"
+import StyleSelector from "../components/StyleSelector"
+
 
 const Generate = () => {
   
@@ -43,6 +45,8 @@ const Generate = () => {
 
                   <AspectRatioSelector value={aspectRatio} onChange={setAspectRatio}/>
 
+
+                  <StyleSelector value={style} onChange={setStyle} isOpen={styleDialogOpen} setIsOpen={setStyleDialogOpen}/>
 
                   <div className="space-y-2">
                     <label className="block text-sm font-medium ">
