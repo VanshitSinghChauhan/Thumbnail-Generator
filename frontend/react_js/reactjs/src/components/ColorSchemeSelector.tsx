@@ -11,10 +11,8 @@ const ColorSchemeSelector = ({value, onChange} : {value: string; onChange: (sche
                     type="button"
                     onClick={() => onChange(scheme.id)}
                     className={`relative rounded-lg transition-all ${
-                        value === scheme.id
-                        //&& 'ring-2 ring-orange-500'
-                            ? "border-blue-500 ring-2 ring-blue-500"
-                            : "border-gray-300 hover:border-gray-400"
+                        value === scheme.id && 'ring-2 ring-orange-500'
+                            
                     }`}
                     title={scheme.name}>
                         <div className="flex h-10 rounded-lg overflow-hidden">
