@@ -1,6 +1,6 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import {type IThumbnail, type AspectRatio, colorSchemes, type ThumbnailStyle} from  "../assets/assets"
+import {type IThumbnail, type AspectRatio, colorSchemes, type ThumbnailStyle, dummyThumbnails} from  "../assets/assets"
 import SoftBackdrop from "../components/SoftBackdrop"
 import AspectRatioSelector from "../components/AspectRatioSelector"
 import StyleSelector from "../components/StyleSelector"
@@ -22,7 +22,30 @@ const Generate = () => {
 
 
   const [styleDialogOpen, setStyleDialogOpen] = useState(false)
+
+  const handleGenerate = async ()=>{
+
+  }
   
+  const fetchThumbnail = async() => {
+    if (id){
+      const thumbnail : any = dummyThumbnails.find((thumbnail)=>thumbnail._id === id);
+      setThumbnail(thumbnail)
+      setAdditionalDetails(thumbnail.user_prompt)
+      setTitle(thumbnail.title)
+      setColorSchemeId(thumbnail.color_scheme)
+      setAspectRatio(thumbnail.aspect_ratio)
+      setStyle(thumbnail.style)
+      setLoading(false)
+    }
+  }
+
+  useEffect(()=>{
+    if(id){
+      fetchThumbnail()
+    }
+  },[id])
+
   return (
     <>
       <SoftBackdrop/>
@@ -45,6 +68,7 @@ const Generate = () => {
                     </div>
                   </div>
 
+
                   <AspectRatioSelector value={aspectRatio} onChange={setAspectRatio}/>
 
 
@@ -61,9 +85,11 @@ const Generate = () => {
                     <textarea value={additionalDetails} onChange={(e)=>setAdditionalDetails(e.target.value)} maxLength={500} rows={3} placeholder="e.g., Include vibrant colors, a person exercising, and a clean layout." className="w-full px-4 py-3 rounded-lg border border-white/12 bg-black/20 text-zinc-100 placeholder-text-zinc-400 focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none"/>
                   </div>
                 </div>
+
+                
                   {/*Button*/}
                 {!id && (
-                  <button className="text-[15px] w-full py-3.5 rounded-xl font-medium bg-gradient-to-b from-orange-500 to-orange-600 hover:from-orange-700 disabled:cursor-not-allowed transition-colors">
+                  <button onClick={handleGenerate} className="text-[15px] w-full py-3.5 rounded-xl font-medium bg-gradient-to-b from-orange-500 to-orange-600 hover:from-orange-700 disabled:cursor-not-allowed transition-colors">
                     {loading ? 'Generating...' : 'Generate Thumbnail'}
                   </button>
                 )}

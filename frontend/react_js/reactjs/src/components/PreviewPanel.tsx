@@ -16,7 +16,7 @@ const PreviewPanel = ({thumbnail, isLoading, aspectRatio} : {thumbnail: IThumbna
 
     return (
         <div className="relative mx-auto w-full max-w-2xl">
-            <div className={`relative min-h-[450] overflow-hidden ${aspectClasses[aspectRatio]}`}>
+            <div className={`relative overflow-hidden ${aspectClasses[aspectRatio]}`}>
                 
                 {/*Loading State*/}
                 {isLoading && (
@@ -31,7 +31,7 @@ const PreviewPanel = ({thumbnail, isLoading, aspectRatio} : {thumbnail: IThumbna
 
                 {/*Image Preview*/}
                 {!isLoading && thumbnail?.image_url &&(
-                    <div className="group-relative h-full w-full">
+                    <div className="group relative h-full w-full">
                         <img src={thumbnail?.image_url} alt={thumbnail.title}
                         className="h-full w-full object-cover"/>
                         
