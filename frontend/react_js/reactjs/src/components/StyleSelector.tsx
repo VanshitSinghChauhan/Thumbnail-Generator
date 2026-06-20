@@ -36,7 +36,7 @@ const StyleSelector = ({value, isOpen, onChange, setIsOpen} : {value: ThumbnailS
             
         </button>
         {isOpen && (
-            <div className="absolute bottom-0 z-50 mt-1 w-full rounded-md bg-white/8 border border-white/12 backdrop-blur-3xl shadow-lg">
+            <div className="absolute bottom-0 z-50 mt-1 w-full rounded-md bg-black/20 border border-white/12 backdrop-blur-3xl shadow-lg">
                 {
                     thumbnailStyles.map((style)=>(
                         <button key={style}
@@ -55,12 +55,9 @@ const StyleSelector = ({value, isOpen, onChange, setIsOpen} : {value: ThumbnailS
                     ))
                 }
             </div>
-        )}
-        
-        
+        )}    
     </div>
-    
-  )
+    )
 }
 
 export default StyleSelector;
