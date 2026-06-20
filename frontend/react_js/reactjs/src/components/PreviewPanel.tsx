@@ -52,7 +52,7 @@ const PreviewPanel = ({thumbnail, isLoading, aspectRatio} : {thumbnail: IThumbna
                             <ImageIcon className="size-10 text-white opacity-50"/>
                         </div>
                         <div className="px-4 text-center">
-                            <p className="font-medium text-gray-210">Generate Your first Thumbnail</p>
+                            <p className="font-medium text-gray-200">Generate Your first Thumbnail</p>
                             <p className="mt-1 text-xs text-gray-400">Fill out the form and click generate</p>
                         </div>
                     </div>
