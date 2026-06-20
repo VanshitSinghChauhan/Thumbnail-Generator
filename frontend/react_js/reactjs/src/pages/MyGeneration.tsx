@@ -1,7 +1,11 @@
+import SoftBackdrop from "../components/SoftBackdrop";
 
 export const MyGeneration = () => {
   return (
-    <div>MyGeneration</div>
+    <>
+      <SoftBackdrop />
+
+    </>
   )
 }
 export default MyGeneration;
