@@ -1,9 +1,17 @@
 import { dummyThumbnails, type IThumbnail } from "../assets/assets";
 import { useState, useEffect } from "react";
 import SoftBackdrop from "../components/SoftBackdrop";
+import { useNavigate } from "react-router-dom";
 
 export const MyGeneration = () => {
 
+  const navigate = useNavigate()
+
+  const aspectRatioClassMap : Record<string, string> = {
+    '16:9': 'aspect-video',
+    '1:1': 'aspect-square',
+    '9:16': 'aspect-[9/16]'
+  }
   const [thumbnails, setThumbnails] = useState<IThumbnail[]>([])
   const [loading, setLoading] = useState(false)
 
@@ -50,6 +58,33 @@ export const MyGeneration = () => {
           <div className="text-center py-24">
             <h3 className="text-lg font-semibold text-zinc-200">No Thumbnails Yet</h3>
             <p text-sm text-zinc-400 mt-2>Generate your first thumbnail to see it here</p>
+          </div>
+        )}
+
+        {/*Grid */}
+        {!loading && thumbnails.length > 0 && (
+          <div className="columns-1 sm:columns-2 lg:columns-3 2xl:columns-4 gap-8">
+            {thumbnails.map((thumb: IThumbnail)=>{
+              const aspectClass = aspectRatioClassMap[thumb.aspect_ratio || '16:9'];
+
+              return (
+                <div key={thumb._id} onClick={()=>navigate(`/generate/${thumb._id}`)} className="mb-8 group relative cursor-pointer rounded-2xl bg-white/6 border border-white/10 transition shadow-xl break-inside-avoid">
+
+                  {/*Image */}
+                  <div className={`relative overflow-hidden rounded-t-2xl ${aspectClass} bg-black`}>
+                    {thumb.image_url ? (
+                      <img src={thumb.image_url} alt={thumb.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+                    ) : (
+                      <div className="w-full h-full items-center justify-center text-sm text-zinc-400">
+                        {thumb.isGenerating ? 'Generating...': 'No image'}
+                      </div>
+                    )}
+
+                    {thumb.isGenerating && <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-sm font-medium text-white">Generating...</div>}
+                  </div>
+                </div>
+              )
+            })}
           </div>
         )}
 
