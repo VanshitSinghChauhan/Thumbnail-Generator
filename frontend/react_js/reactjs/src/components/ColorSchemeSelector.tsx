@@ -3,7 +3,7 @@ import { colorSchemes } from "../assets/assets"
 const ColorSchemeSelector = ({value, onChange} : {value: string; onChange: (scheme: string) => void}) => {
   return (
     <div className='space-y-3'>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Color Scheme</label>
+        <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Color Scheme</label>
         <div className="grid grid-cols-6 gap-3">
             {colorSchemes.map((scheme) => (
                 <button
@@ -23,7 +23,7 @@ const ColorSchemeSelector = ({value, onChange} : {value: string; onChange: (sche
                 </button>
             ))}
         </div>
-        <p className="text-xs text-gray-400">Selected: {colorSchemes.find((s) => s.id === value)?.name || "None"}</p>
+        <p className="text-xs text-zinc-400">Selected: {colorSchemes.find((s) => s.id === value)?.name || "None"}</p>
     </div>
   )
 }

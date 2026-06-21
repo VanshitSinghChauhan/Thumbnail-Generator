@@ -19,7 +19,7 @@ const StyleSelector = ({value, isOpen, onChange, setIsOpen} : {value: ThumbnailS
   
     return (
     <div className="relative space-y-3 dark">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Style</label>
+        <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Style</label>
         <button
         type="button"
         onClick={()=>setIsOpen(!isOpen)}
@@ -29,10 +29,10 @@ const StyleSelector = ({value, isOpen, onChange, setIsOpen} : {value: ThumbnailS
                     {styleIcons[value]}
                     <span>{value}</span>
                 </div>
-                <p className="text-xs text-gray-400">{styleDescriptions[value]}</p>
+                <p className="text-xs text-zinc-400">{styleDescriptions[value]}</p>
 
             </div>
-            <ChevronDownIcon className={['h-5 w-5 text-gray-400 transition-transformation', isOpen && 'rotate-180'].join(' ')}/>
+            <ChevronDownIcon className={['h-5 w-5 text-zinc-400 transition-transformation', isOpen && 'rotate-180'].join(' ')}/>
             
         </button>
         {isOpen && (
