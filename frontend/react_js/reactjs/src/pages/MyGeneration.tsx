@@ -104,7 +104,7 @@ export const MyGeneration = () => {
                     onClick={()=>handleDownlaod(thumb.image_url!)}
                     className="size-6 bg-black/50 p-1 rounded hover:bg-orange-600 transition-all" />  
                     
-                    <Link target="_blank" to={`/preview?thumbnail_url=${thumb.image_url}&title=${thumb.title}`}>
+                    <Link target="_blank" to={`/yt-preview?thumbnail_url=${thumb.image_url}&title=${thumb.title}`}>
                     <ArrowUpRightIcon
                     className="size-6 bg-black/50 p-1 rounded hover:bg-orange-600 transition-all" />  
                     </Link>
