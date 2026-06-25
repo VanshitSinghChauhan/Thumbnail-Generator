@@ -80,3 +80,19 @@ export const logoutUser = async (req: Request, res: Response)=>{
     })
     return res.status(500).json({message: 'Logout Successfully'})
 }
+
+export const verifyUser = async (req: Request, res: Response)=>{
+    try {
+        const {userId} = req.session;
+        const user = await User.findById(userId).select('-password')
+
+        if(!user){
+            return res.status(500).json({message: 'Invalid User'})
+        }
+
+        return res.json({user})
+    } catch (error : any) {
+        console.log(error)
+        res.status(500).json({message: error.message})
+    }
+}
