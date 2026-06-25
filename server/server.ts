@@ -4,6 +4,9 @@ import cors from 'cors';
 import type { Request, Response } from 'express';
 import connectDB from './configs/db.js';
 import session from 'express-session';
+import MongoStore from 'connect-mongo';
+import AuthRouter from './routes/AuthRoutes.js';
+
 
 declare module 'express-session' {
     interface SessionData{
@@ -11,6 +14,7 @@ declare module 'express-session' {
         userId: string
     }
 }
+console.log(process.env.MONGODB_URL)
 
 await connectDB()
 
@@ -28,6 +32,10 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {maxAge: 1000 * 60 * 60 * 24 * 7}, //7days
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGODB_URL as string,
+        collectionName: 'sessions'
+    })
 }))
 
 app.use(express.json());
@@ -37,6 +45,8 @@ const port = process.env.PORT || 3000;
 app.get('/', (req: Request, res: Response) => {
     res.send('Server is Live!');
 });
+
+app.use('/api/auth', AuthRouter)
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
