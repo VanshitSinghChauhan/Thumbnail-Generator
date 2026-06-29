@@ -12,7 +12,7 @@ export default function CTASection() {
             transition={{ type: "spring", stiffness: 320, damping: 70, mass: 1 }}
         >
             <div>
-                <motion.h1 className="text-4xl md:text-[46px] md:leading-15 font-semibold bg-linear-to-r from-white to-orange-400 text-transparent bg-clip-text"
+                <motion.h1 className="text-4xl md:text-[46px] md:leading-15 font-semibold bg-linear-to-r from-white to-violet-400 text-transparent bg-clip-text"
                     initial={{ y: 80, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     viewport={{ once: true }}
@@ -20,7 +20,7 @@ export default function CTASection() {
                 >
                     Ready to get views?
                 </motion.h1>
-                <motion.p className="bg-linear-to-r from-white to-orange-400 text-transparent bg-clip-text text-lg"
+                <motion.p className="bg-linear-to-r from-white to-violet-400 text-transparent bg-clip-text text-lg"
                     initial={{ y: 80, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     viewport={{ once: true }}

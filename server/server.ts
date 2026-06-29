@@ -16,7 +16,6 @@ declare module 'express-session' {
         userId: string
     }
 }
-console.log(process.env.MONGODB_URL)
 
 await connectDB()
 

@@ -32,7 +32,7 @@ export default function FeaturesSection() {
                 ))}
             </div>
             <div className="mt-40 relative mx-auto max-w-5xl">
-                <div className="absolute -z-50 size-100 -top-10 -left-20 aspect-square rounded-full bg-orange-500/40 blur-3xl"></div>
+                
                 <motion.p className="text-slate-300 text-lg text-left max-w-3xl"
                     initial={{ y: 150, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
