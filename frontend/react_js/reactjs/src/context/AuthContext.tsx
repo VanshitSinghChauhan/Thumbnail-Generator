@@ -52,8 +52,27 @@ export const AuthProvider = ({children}:{children: React.ReactNode}) => {
             console.log(error)
         }
     }
-    const logout = async ()=>{}
-    const fetchUser = async ()=>{}
+    const logout = async ()=>{
+        try {
+            const {data} = await api.post('/api/auth/logout');
+            setUser(null)
+            setIsLoggedIn(false)
+            toast.success(data.message)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const fetchUser = async ()=>{
+        try {
+            const {data} = await api.get('/api/auth/verify');
+            if(data.user){
+                setUser(data.user as IUser)
+                setIsLoggedIn(true)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     useEffect(()=>{
         (async ()=>{
