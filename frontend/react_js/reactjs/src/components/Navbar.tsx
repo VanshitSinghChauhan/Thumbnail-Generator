@@ -4,7 +4,6 @@ import { motion } from "motion/react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/AI_Thumbnail_logo.svg";
 import { useAuth } from "../context/AuthContext";
-import { button } from "motion/react-client";
 
 export default function Navbar() {
     const {isLoggedIn, user, logout} = useAuth()
