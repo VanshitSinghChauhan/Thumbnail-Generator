@@ -1,16 +1,21 @@
 import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import {type IThumbnail, type AspectRatio, colorSchemes, type ThumbnailStyle, dummyThumbnails} from  "../assets/assets"
-import SoftBackdrop from "../components/SoftBackdrop"
 import AspectRatioSelector from "../components/AspectRatioSelector"
 import StyleSelector from "../components/StyleSelector"
 import ColorSchemeSelector from "../components/ColorSchemeSelector"
 import PreviewPanel from "../components/PreviewPanel"
+import { useAuth } from "../context/AuthContext"
+import toast from "react-hot-toast"
+import api from "../configs/api"
 
 
 const Generate = () => {
   
   const {id} = useParams()
+  const {pathname} = useLocation()
+  const navigate = useNavigate()
+  const {isLoggedIn} = useAuth()
   const [title, setTitle] = useState('')
   const [additionalDetails, setAdditionalDetails] = useState('')
   const [thumbnail, setThumbnail] = useState<IThumbnail | null>(null)
@@ -24,7 +29,24 @@ const Generate = () => {
   const [styleDialogOpen, setStyleDialogOpen] = useState(false)
 
   const handleGenerate = async ()=>{
+    if(!isLoggedIn) return toast.error('Please login to generate thumbnails')
+      if(!title.trim()) return toast.error('Please enter a title for the thumbnail')
+        setLoading(true)
 
+    const api_payload = {
+      title,
+      prompt: additionalDetails,
+      style,
+      aspect_ratio: aspectRatio,
+      color_scheme: colorSchemeId,
+      text_overlay: true
+    }
+
+    const {data} = await api.post('/api/thumbnail/generate', api_payload);
+    if(data.thumbnail){
+      navigate('/generate/' + data.thumbnail._id)
+      toast.success(data.message)
+    }
   }
   
   const fetchThumbnail = async() => {
