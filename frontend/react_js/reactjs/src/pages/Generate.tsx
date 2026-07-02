@@ -50,23 +50,38 @@ const Generate = () => {
   }
   
   const fetchThumbnail = async() => {
-    if (id){
-      const thumbnail : any = dummyThumbnails.find((thumbnail)=>thumbnail._id === id);
-      setThumbnail(thumbnail)
-      setAdditionalDetails(thumbnail.user_prompt)
-      setTitle(thumbnail.title)
-      setColorSchemeId(thumbnail.color_scheme)
-      setAspectRatio(thumbnail.aspect_ratio)
-      setStyle(thumbnail.style)
-      setLoading(false)
+    try {
+      const {data} = await api.get(`/api/user/thumbnail/${id}`);
+      setThumbnail(data?.thumbnail as IThumbnail)
+      setLoading(!data?.thumbnail?.image_url)
+      setAdditionalDetails(data?.thumbnail?.user_prompt)
+      setTitle(data?.thumbnail?.title)
+      setColorSchemeId(data?.thumbnail?.color_scheme)
+      setAspectRatio(data?.thumbnail?.aspect_ratio)
+      setStyle(data?.thumbnail?.style)
+    } catch (error : any) {
+      toast.error(error?.response?.data?.message || error.message)
     }
   }
 
   useEffect(()=>{
-    if(id){
+    if(isLoggedIn && id){
       fetchThumbnail()
     }
-  },[id])
+    if(id && loading && isLoggedIn){
+      const interval = setInterval(()=>{
+        fetchThumbnail()
+      }, 5000);
+      return () => clearInterval(interval)
+    }
+  },[id, loading, isLoggedIn])
+
+  useEffect(()=>{
+
+    if(!id && thumbnail){
+      setThumbnail(null)
+    }
+  })
 
   return (
     <>
