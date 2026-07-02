@@ -64,7 +64,7 @@ const Login = () => {
             </div>
 
             <div className="mt-4 text-left">
-                <button className="text-sm text-orange-400 hover:underline">
+                <button type="button" className="text-sm text-orange-400 hover:underline">
                     Forget password?
                 </button>
             </div>

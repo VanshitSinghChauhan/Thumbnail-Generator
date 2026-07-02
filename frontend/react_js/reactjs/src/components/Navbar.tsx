@@ -54,11 +54,12 @@ export default function Navbar() {
                         <button onClick={()=> navigate('/login')} className="hidden md:block px-6 py-2.5 bg-orange-600 hover:bg-orange-700 active:scale-95 transition-all rounded-full"> Get Started </button>
                         ) 
                     }
+                    <button onClick={() => setIsOpen(true)} className="md:hidden">
+                        <MenuIcon size={26} className="active:scale-90 transition" />
+                    </button>
                 </div>
                 
-                <button onClick={() => setIsOpen(true)} className="md:hidden">
-                    <MenuIcon size={26} className="active:scale-90 transition" />
-                </button>
+                
             </motion.nav>
 
             <div className={`fixed inset-0 z-100 bg-black/40 backdrop-blur flex flex-col items-center justify-center text-lg gap-8 md:hidden transition-transform duration-400 ${isOpen ? "translate-x-0" : "-translate-x-full"}`}>

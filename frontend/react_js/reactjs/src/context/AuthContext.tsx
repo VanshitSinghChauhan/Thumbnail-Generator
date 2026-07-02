@@ -36,7 +36,7 @@ export const AuthProvider = ({children}:{children: React.ReactNode}) => {
                 setIsLoggedIn(true)
             }
             toast.success(data.message)
-        } catch (error) {
+        } catch (error ) {
             console.log(error)
         }
     }
